@@ -1,15 +1,12 @@
 package com.foodblog.service;
 
-import com.foodblog.models.ERole;
 import com.foodblog.models.Role;
 import com.foodblog.models.User;
-import com.foodblog.repository.RoleRepository;
 import com.foodblog.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collections;
 
 @Service
 public class AuthService {
@@ -17,16 +14,12 @@ public class AuthService {
 
     private final UserRepository userRepository;
 
-    private final RoleRepository roleRepository;
-
     private final PasswordEncoder encoder;
 
 
     public AuthService(UserRepository userRepository,
-                       RoleRepository roleRepository,
                        PasswordEncoder encoder) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
         this.encoder = encoder;
     }
 
@@ -50,28 +43,24 @@ public class AuthService {
                 roles));
     }*/
 
-    public void registerUser(String login,
+    public boolean registerUser(String username,
                                           String password,
                                           String email) {
 
-        if (userRepository.existsByUsername(login)) {
-            return;
+        User userFromDb = userRepository.findByUsername(username);
+
+        if (userFromDb != null) {
+            return false;
         }
 
-        if (userRepository.existsByEmail(email)) {
-            return;
-        }
-
-        // Create new user's account
-        User user = new User(login,
-                email,
-                encoder.encode(password));
-
-        Set<Role> roles = new HashSet<>();
-        Role userRole = roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-
-        roles.add(userRole);
-        user.setRoles(roles);
+        User user = new User();
+        user.setUsername(username);
+        user.setActive(true);
+        user.setRoles(Collections.singleton(Role.USER));
+        user.setPassword(encoder.encode(password));
+        user.setEmail(email);
         userRepository.save(user);
+
+        return true;
     }
 }

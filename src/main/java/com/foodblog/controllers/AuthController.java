@@ -16,11 +16,11 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@RequestParam String login,
+    public String registerUser(@RequestParam String username,
                                           @RequestParam String password,
                                           @RequestParam String email) {
 
-		authService.registerUser(login, password, email);
+		authService.registerUser(username, password, email);
 
 		return "redirect:/";
     }

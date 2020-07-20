@@ -105,16 +105,14 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="#">About Us</a></li>
+                                    <li><a th:href="@{index.html}">Home</a></li>
                                     <li><a href="#">Pages</a>
                                         <ul class="dropdown">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="catagory.html">Catagory</a></li>
-                                            <li><a href="catagory-post.html">Catagory Post</a></li>
-                                            <li><a href="single-post.html">Single Post</a></li>
-                                            <li><a href="receipe.html">Recipe</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a th:href="@{/}">Home</a></li>
+                                            <li><a th:href="@{/category}">Catagory</a></li>
+                                            <li><a th:href="@{/category-post}">Catagory Post</a></li>
+                                            <li><a th:href="@{/receipe}">Recipe</a></li>
+                                            <li><a th:href="@{/contact}">Contact</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="#">Recipes</a>
@@ -157,12 +155,13 @@
                                             </ul>
                                         </div>
                                     </li>
-                                    <li><a href="single-post.html">Blog</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a th:href="@{/contact}">Contact</a></li>
                                 </ul>
 
                                 <!-- Login/Register -->
                                 <div class="login-area">
+
+                                    <span sec:authentication="name">Bob</span>
 
                                     <a  sec:authorize="isAuthenticated()" th:href="@{/Profile}">Profile</a>
                                     <a  sec:authorize="isAuthenticated()" th:href="@{/logout}">logout</a>
@@ -201,112 +200,10 @@
                 <a href="#" class="post-title" th:text="${blog.tittle}"></a>
                 <div class="post-meta">
                     <a href="#" class="post-date" th:text="${blog.date}"></a>
-                    <a href="#" class="post-author" th:text="By +${blog.author}"></a>
+                    <a href="#" class="post-author" th:text="'By '+${blog.author.getUsername()}"></a>
                 </div>
             </div>
         </div>
-
-        <!-- Single Blog Post -->
-        <!--<div class="single-blog-post style-1 d-flex flex-wrap mb-30">
-            &lt;!&ndash; Blog Thumbnail &ndash;&gt;
-            <div class="blog-thumbnail">
-                <img src="../static/img/bg-img/9.jpg" alt="">
-            </div>
-            &lt;!&ndash; Blog Content &ndash;&gt;
-            <div class="blog-content">
-                <a href="#" class="post-tag">The Best</a>
-                <a href="#" class="post-title">Friend eggs with ham</a>
-                <div class="post-meta">
-                    <a href="#" class="post-date">July 11, 2018</a>
-                    <a href="#" class="post-author">By Julia Stiles</a>
-                </div>
-            </div>
-        </div>
-
-        &lt;!&ndash; Single Blog Post &ndash;&gt;
-        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
-            &lt;!&ndash; Blog Thumbnail &ndash;&gt;
-            <div class="blog-thumbnail">
-                <img src="../static/img/bg-img/10.jpg" alt="">
-            </div>
-            &lt;!&ndash; Blog Content &ndash;&gt;
-            <div class="blog-content">
-                <a href="#" class="post-tag">The Best</a>
-                <a href="#" class="post-title">Mushrooms with pork chop</a>
-                <div class="post-meta">
-                    <a href="#" class="post-date">July 11, 2018</a>
-                    <a href="#" class="post-author">By Julia Stiles</a>
-                </div>
-            </div>
-        </div>
-
-        &lt;!&ndash; Single Blog Post &ndash;&gt;
-        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
-            &lt;!&ndash; Blog Thumbnail &ndash;&gt;
-            <div class="blog-thumbnail">
-                <img src="../static/img/bg-img/11.jpg" alt="">
-            </div>
-            &lt;!&ndash; Blog Content &ndash;&gt;
-            <div class="blog-content">
-                <a href="#" class="post-tag">The Best</a>
-                <a href="#" class="post-title">Birthday cake with chocolate</a>
-                <div class="post-meta">
-                    <a href="#" class="post-date">July 11, 2018</a>
-                    <a href="#" class="post-author">By Julia Stiles</a>
-                </div>
-            </div>
-        </div>
-
-        &lt;!&ndash; Single Blog Post &ndash;&gt;
-        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
-            &lt;!&ndash; Blog Thumbnail &ndash;&gt;
-            <div class="blog-thumbnail">
-                <img src="../static/img/bg-img/9.jpg" alt="">
-            </div>
-            &lt;!&ndash; Blog Content &ndash;&gt;
-            <div class="blog-content">
-                <a href="#" class="post-tag">The Best</a>
-                <a href="#" class="post-title">Friend eggs with ham</a>
-                <div class="post-meta">
-                    <a href="#" class="post-date">July 11, 2018</a>
-                    <a href="#" class="post-author">By Julia Stiles</a>
-                </div>
-            </div>
-        </div>
-
-        &lt;!&ndash; Single Blog Post &ndash;&gt;
-        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
-            &lt;!&ndash; Blog Thumbnail &ndash;&gt;
-            <div class="blog-thumbnail">
-                <img src="../static/img/bg-img/10.jpg" alt="">
-            </div>
-            &lt;!&ndash; Blog Content &ndash;&gt;
-            <div class="blog-content">
-                <a href="#" class="post-tag">The Best</a>
-                <a href="#" class="post-title">Mushrooms with pork chop</a>
-                <div class="post-meta">
-                    <a href="#" class="post-date">July 11, 2018</a>
-                    <a href="#" class="post-author">By Julia Stiles</a>
-                </div>
-            </div>
-        </div>
-
-        &lt;!&ndash; Single Blog Post &ndash;&gt;
-        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
-            &lt;!&ndash; Blog Thumbnail &ndash;&gt;
-            <div class="blog-thumbnail">
-                <img src="../static/img/bg-img/11.jpg" alt="">
-            </div>
-            &lt;!&ndash; Blog Content &ndash;&gt;
-            <div class="blog-content">
-                <a href="#" class="post-tag">The Best</a>
-                <a href="#" class="post-title">Birthday cake with chocolate</a>
-                <div class="post-meta">
-                    <a href="#" class="post-date">July 11, 2018</a>
-                    <a href="#" class="post-author">By Julia Stiles</a>
-                </div>
-            </div>
-        </div>-->
 
     </div>
     <!-- ##### Treading Post Area End ##### -->
@@ -329,7 +226,7 @@
                         <a href="#" class="post-title" th:text="${blog.tittle}"></a>
                         <div class="post-meta">
                             <a href="#" class="post-date" th:text="${blog.date}"></a>
-                            <a href="#" class="post-author" th:text="By +${blog.author}"></a>
+                            <a href="#" class="post-author" th:text="'By '+${blog.author.getUsername()}"></a>
                         </div>
                     </div>
                 </div>
@@ -345,44 +242,16 @@
                 <!-- Single Post Catagory -->
                 <div class="col-12 col-md-6 col-lg-4" th:each="blog : ${category_blogs}">
                     <div class="single-post-catagory mb-30">
-                        <img src="../static/img/bg-img/4.jpg" alt="">
+                        <img th:src="@{../static/img/bg-img/4.jpg}" alt="">
                         <!-- Content -->
                         <div class="catagory-content-bg">
                             <div class="catagory-content">
-                                <a href="#" class="post-tag" th:text="${blog.tag}">The Best</a>
-                                <a href="#" class="post-title" th:text="${blog.tittle}">Healthy Food</a>
+                                <a href="#" class="post-tag" th:text="${blog.tag}"></a>
+                                <a href="#" class="post-title" th:text="${blog.tittle}"></a>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Single Post Catagory -->
-                <!--<div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-post-catagory mb-30">
-                        <img src="../static/img/bg-img/5.jpg" alt="">
-                        &lt;!&ndash; Content &ndash;&gt;
-                        <div class="catagory-content-bg">
-                            <div class="catagory-content">
-                                <a href="#" class="post-tag">The Best</a>
-                                <a href="#" class="post-title">Organic Cuisine</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                &lt;!&ndash; Single Post Catagory &ndash;&gt;
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-post-catagory mb-30">
-                        <img src="../static/img/bg-img/6.jpg" alt="">
-                        &lt;!&ndash; Content &ndash;&gt;
-                        <div class="catagory-content-bg">
-                            <div class="catagory-content">
-                                <a href="#" class="post-tag">The Best</a>
-                                <a href="#" class="post-title">Vegetarian Food</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
             </div>
         </div>
     </div>
@@ -404,7 +273,7 @@
                         <a href="#" class="post-title" th:text="${blog.tittle}"></a>
                         <div class="post-meta">
                             <a href="#" class="post-date" th:text="${blog.date}"></a>
-                            <a href="#" class="post-author" th:text="By +${blog.author}"></a>
+                            <a href="#" class="post-author" th:text="'By '+${blog.author.getUsername()}"></a>
                         </div>
                         <p th:text="${blog.description}"></p>
                         <a href="#" class="btn bueno-btn">Read More</a>
@@ -420,7 +289,7 @@
                         <a href="#" class="post-title" th:text="${blog.tittle}"></a>
                         <div class="post-meta">
                             <a href="#" class="post-date" th:text="${blog.date}"></a>
-                            <a href="#" class="post-author" th:text="By +${blog.author}"></a>
+                            <a href="#" class="post-author" th:text="'By '+${blog.author.getUsername()}"></a>
                         </div>
                         <p th:text="${blog.description}"></p>
                         <a href="#" class="btn bueno-btn">Read More</a>
@@ -454,7 +323,7 @@
                             <a href="#" class="post-title" th:text="${blog.tittle}"></a>
                             <div class="post-meta">
                                 <a href="#" class="post-date" th:text="${blog.date}"></a>
-                                <a href="#" class="post-author" th:text="${blog.author}"></a>
+                                <a href="#" class="post-author" th:text="${blog.author.getUsername()}"></a>
                             </div>
                             <p th:text="${blog.description}"></p>
                         </div>
@@ -485,75 +354,10 @@
                                     <a href="#" class="post-title" th:text="${blog.tittle}"></a>
                                     <div class="post-meta">
                                         <a href="#" class="post-date" th:text="${blog.date}"></a>
-                                        <a href="#" class="post-author" th:text="By + ${blog.author}"></a>
+                                        <a href="#" class="post-author" th:text="'By '+${blog.author.getUsername()}"></a>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Single Post Area -->
-                            <!--<div class="single-post-area d-flex mb-30">
-                                &lt;!&ndash; Blog Thumbnail &ndash;&gt;
-                                <div class="blog-thumbnail">
-                                    <img src="../static/img/bg-img/13.jpg" alt="">
-                                </div>
-                                &lt;!&ndash; Blog Content &ndash;&gt;
-                                <div class="blog-content">
-                                    <a href="#" class="post-title">Burger with fries</a>
-                                    <div class="post-meta">
-                                        <a href="#" class="post-date">July 11, 2018</a>
-                                        <a href="#" class="post-author">By Julia Stiles</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            &lt;!&ndash; Single Post Area &ndash;&gt;
-                            <div class="single-post-area d-flex">
-                                &lt;!&ndash; Blog Thumbnail &ndash;&gt;
-                                <div class="blog-thumbnail">
-                                    <img src="../static/img/bg-img/14.jpg" alt="">
-                                </div>
-                                &lt;!&ndash; Blog Content &ndash;&gt;
-                                <div class="blog-content">
-                                    <a href="#" class="post-title">Avocado &amp; Oisters</a>
-                                    <div class="post-meta">
-                                        <a href="#" class="post-date">July 11, 2018</a>
-                                        <a href="#" class="post-author">By Julia Stiles</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            &lt;!&ndash; Single Post Area &ndash;&gt;
-                            <div class="single-post-area d-flex">
-                                &lt;!&ndash; Blog Thumbnail &ndash;&gt;
-                                <div class="blog-thumbnail">
-                                    <img src="../static/img/bg-img/15.jpg" alt="">
-                                </div>
-                                &lt;!&ndash; Blog Content &ndash;&gt;
-                                <div class="blog-content">
-                                    <a href="#" class="post-title">Tortilla prawns</a>
-                                    <div class="post-meta">
-                                        <a href="#" class="post-date">July 11, 2018</a>
-                                        <a href="#" class="post-author">By Julia Stiles</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            &lt;!&ndash; Single Post Area &ndash;&gt;
-                            <div class="single-post-area d-flex">
-                                &lt;!&ndash; Blog Thumbnail &ndash;&gt;
-                                <div class="blog-thumbnail">
-                                    <img src="../static/img/bg-img/16.jpg" alt="">
-                                </div>
-                                &lt;!&ndash; Blog Content &ndash;&gt;
-                                <div class="blog-content">
-                                    <a href="#" class="post-title">Burger with fries</a>
-                                    <div class="post-meta">
-                                        <a href="#" class="post-date">July 11, 2018</a>
-                                        <a href="#" class="post-author">By Julia Stiles</a>
-                                    </div>
-                                </div>
-                            </div>-->
-
                         </div>
                     </div>
                 </div>

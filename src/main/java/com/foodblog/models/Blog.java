@@ -10,13 +10,17 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String filename;
+
     private String tag;
 
     private String tittle;
 
     private String date;
 
-    private String author;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User author;
 
     private String description;
 
@@ -56,11 +60,11 @@ public class Blog {
         this.date = date;
     }
 
-    public String getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 
@@ -70,5 +74,13 @@ public class Blog {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }

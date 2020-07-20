@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <form method="post" enctype="multipart/form-data" th:action="@{/add}">
+        <input type="text" name="tittle" placeholder="Заголовок" />
+        <input type="text" name="tag" placeholder="Тэг">
+        <input type="text" name="data" placeholder="Дата" />
+        <input type="text" name="description" placeholder="Описание">
+        <input type="file" name="file">
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+
+</body>
+</html>

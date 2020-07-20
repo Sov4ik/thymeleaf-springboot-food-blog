@@ -1,9 +1,16 @@
 package com.foodblog.controllers;
 
+import com.foodblog.models.User;
 import com.foodblog.service.BlogService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 public class BlogController {
@@ -29,8 +36,26 @@ public class BlogController {
 
         model.addAttribute("bar_post", blogService.sideBarPosts());
 
-        model.addAttribute("blogs", blogService.allBlogs());
         return "index";
+    }
+
+    @PostMapping("/add")
+    public String addNewBlog(@AuthenticationPrincipal User user,
+                             @RequestParam String tittle,
+                             @RequestParam String tag,
+                             @RequestParam String data,
+                             @RequestParam String description,
+                             @RequestParam("file") MultipartFile file) throws IOException {
+
+        System.out.println(user);
+        blogService.addNewBlog(user, tittle, tag, data, description, file);
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/add")
+    public String addBlog(){
+        return "addBlog";
     }
 
 }
