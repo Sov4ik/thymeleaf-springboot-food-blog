@@ -88,4 +88,12 @@ public class BlogService {
         blogRepository.save(blog);
     }
 
+    public void deleteBlog(long id){
+        blogRepository.deleteById(id);
+    }
+
+    public Blog singleBlog(long id){
+        return blogRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("Invalid user Id:" + id));
+    }
 }

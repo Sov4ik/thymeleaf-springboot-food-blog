@@ -11,18 +11,4 @@ public class HomeController {
         return "category";
     }
 
-    @GetMapping("/category-post")
-    public String categoryPost(){
-        return "category-post";
-    }
-
-    @GetMapping("/receipe")
-    public String receipe(){
-        return "receipe";
-    }
-
-    @GetMapping("/contact")
-    public String contact(){
-        return "contact";
-    }
 }

@@ -111,7 +111,6 @@
                                             <li><a th:href="@{/}">Home</a></li>
                                             <li><a th:href="@{/category}">Catagory</a></li>
                                             <li><a th:href="@{/category-post}">Catagory Post</a></li>
-                                            <li><a th:href="@{/receipe}">Recipe</a></li>
                                             <li><a th:href="@{/contact}">Contact</a></li>
                                         </ul>
                                     </li>
@@ -161,9 +160,7 @@
                                 <!-- Login/Register -->
                                 <div class="login-area">
 
-                                    <span sec:authentication="name">Bob</span>
-
-                                    <a  sec:authorize="isAuthenticated()" th:href="@{/Profile}">Profile</a>
+                                    <a  sec:authorize="isAuthenticated()" th:href="@{/Profile}" sec:authentication="name"></a>
                                     <a  sec:authorize="isAuthenticated()" th:href="@{/logout}">logout</a>
 
                                     <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
@@ -192,12 +189,12 @@
         <div class="single-blog-post style-1 d-flex flex-wrap mb-30"  th:each="blog : ${trending_blogs}">
             <!-- Blog Thumbnail -->
             <div class="blog-thumbnail">
-                <img src="../static/img/bg-img/9.jpg" alt="">
+                <img th:src="@{../static/uploads/{filename}(filename=${blog.filename})}" alt="">
             </div>
             <!-- Blog Content -->
             <div class="blog-content">
                 <a href="#" class="post-tag" th:text="${blog.tag}"></a>
-                <a href="#" class="post-title" th:text="${blog.tittle}"></a>
+                <a th:href="@{/blog/{id}(id=${blog.id})}" class="post-title" th:text="${blog.tittle}"></a>
                 <div class="post-meta">
                     <a href="#" class="post-date" th:text="${blog.date}"></a>
                     <a href="#" class="post-author" th:text="'By '+${blog.author.getUsername()}"></a>
@@ -216,7 +213,7 @@
             <div class="single-slide" th:each="blog : ${slider_blogs}">
                 <!-- Blog Thumbnail -->
                 <div class="blog-thumbnail">
-                    <a href="#"><img src="../static/img/bg-img/1.jpg" alt=""></a>
+                    <a href="#"><img th:src="@{../static/uploads/{filename}(filename=${blog.filename})}" alt=""></a>
                 </div>
 
                 <!-- Blog Content -->
@@ -242,7 +239,7 @@
                 <!-- Single Post Catagory -->
                 <div class="col-12 col-md-6 col-lg-4" th:each="blog : ${category_blogs}">
                     <div class="single-post-catagory mb-30">
-                        <img th:src="@{../static/img/bg-img/4.jpg}" alt="">
+                        <img th:src="@{../static/uploads/{filename}(filename=${blog.filename})}" alt="">
                         <!-- Content -->
                         <div class="catagory-content-bg">
                             <div class="catagory-content">
@@ -264,7 +261,7 @@
             <div class="row align-items-center" th:each="blog: ${big_post}">
                 <div class="col-12 col-md-6">
                     <div class="big-post-thumbnail mb-50">
-                        <img src="../static/img/bg-img/7.jpg" alt="">
+                        <img th:src="@{../static/uploads/{filename}(filename=${blog.filename})}" alt="">
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
@@ -297,7 +294,7 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="big-post-thumbnail mb-50">
-                        <img src="../static/img/bg-img/8.jpg" alt="">
+                        <img th:src="@{../static/uploads/{filename}(filename=${blog.filename})}" alt="">
                     </div>
                 </div>
             </div>
@@ -315,7 +312,7 @@
                     <div class="single-blog-post style-1 d-flex flex-wrap mb-30" th:each="blog : ${simple_post}">
                         <!-- Blog Thumbnail -->
                         <div class="blog-thumbnail">
-                            <img src="../static/img/bg-img/9.jpg" alt="">
+                            <img th:src="@{../static/uploads/{filename}(filename=${blog.filename})}" alt="">
                         </div>
                         <!-- Blog Content -->
                         <div class="blog-content">
@@ -347,7 +344,7 @@
                             <div class="single-post-area d-flex" th:each="blog : ${bar_post}">
                                 <!-- Blog Thumbnail -->
                                 <div class="blog-thumbnail">
-                                    <img src="../static/img/bg-img/12.jpg" alt="">
+                                    <img th:src="@{../static/uploads/{filename}(filename=${blog.filename})}" alt="">
                                 </div>
                                 <!-- Blog Content -->
                                 <div class="blog-content">

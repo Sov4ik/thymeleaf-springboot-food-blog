@@ -24,8 +24,18 @@ public class Blog {
 
     private String description;
 
+    private String message;
+
     public Blog(){
 
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Long getId() {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Login page</title>
     <!-- Favicon -->
@@ -71,16 +71,13 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="#">About Us</a></li>
+                                <li><a th:href="@{/}">Home</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="category.html">Catagory</a></li>
-                                        <li><a href="category-post.html">Catagory Post</a></li>
-                                        <li><a href="single-post.html">Single Post</a></li>
-                                        <li><a href="receipe.html">Recipe</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a th:href="@{/}">Home</a></li>
+                                        <li><a th:href="@{/category}">Catagory</a></li>
+                                        <li><a th:href="@{/category-post}">Catagory Post</a></li>
+                                        <li><a th:href="@{/contact}">Contact</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Recipes</a>
@@ -123,13 +120,17 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li><a href="single-post.html">Blog</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a th:href="@{/contact}">Contact</a></li>
                             </ul>
 
                             <!-- Login/Register -->
                             <div class="login-area">
-                                <a href="#">Login / Register</a>
+
+                                <a  sec:authorize="isAuthenticated()" th:href="@{/Profile}" sec:authentication="name"></a>
+                                <a  sec:authorize="isAuthenticated()" th:href="@{/logout}">logout</a>
+
+                                <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+                                <a sec:authorize="!isAuthenticated()" th:href="@{/register}">Register</a>
                             </div>
                         </div>
                         <!-- Nav End -->

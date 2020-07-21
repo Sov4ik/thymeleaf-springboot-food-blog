@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -104,16 +104,13 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="#">About Us</a></li>
+                                    <li><a th:href="@{/}">Home</a></li>
                                     <li><a href="#">Pages</a>
                                         <ul class="dropdown">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="category.html">Catagory</a></li>
-                                            <li><a href="category-post.html">Catagory Post</a></li>
-                                            <li><a href="single-post.html">Single Post</a></li>
-                                            <li><a href="receipe.html">Recipe</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a th:href="@{/}">Home</a></li>
+                                            <li><a th:href="@{/category}">Catagory</a></li>
+                                            <li><a th:href="@{/category-post}">Catagory Post</a></li>
+                                            <li><a th:href="@{/contact}">Contact</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="#">Recipes</a>
@@ -156,13 +153,17 @@
                                             </ul>
                                         </div>
                                     </li>
-                                    <li><a href="single-post.html">Blog</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a th:href="@{/contact}">Contact</a></li>
                                 </ul>
 
                                 <!-- Login/Register -->
                                 <div class="login-area">
-                                    <a href="#">Login / Register</a>
+
+                                    <a  sec:authorize="isAuthenticated()" th:href="@{/Profile}" sec:authentication="name"></a>
+                                    <a  sec:authorize="isAuthenticated()" th:href="@{/logout}">logout</a>
+
+                                    <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+                                    <a sec:authorize="!isAuthenticated()" th:href="@{/register}">Register</a>
                                 </div>
                             </div>
                             <!-- Nav End -->
@@ -400,7 +401,7 @@
                 <!-- Single Post Catagory -->
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="single-post-catagory mb-30">
-                        <img src="../static/img/bg-img/17.jpg" alt="">
+                        <img src="../static/uploads/9a83485f-6089-430e-a836-83bf7abf624a.oleg-chursin-vaPoJZB9Mzg-unsplash.jpg" alt="">
                         <!-- Content -->
                         <div class="catagory-content-bg">
                             <div class="catagory-content">
