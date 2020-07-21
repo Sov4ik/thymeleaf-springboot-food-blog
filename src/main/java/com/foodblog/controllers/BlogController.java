@@ -42,6 +42,8 @@ public class BlogController {
 
         model.addAttribute("slider_blogs", blogService.sliderBlogs());
 
+        model.addAttribute("blogs", blogService.allBlogs());
+
         model.addAttribute("trending_blogs", blogService.trendingBlogs());
 
         model.addAttribute("category_blogs", blogService.categoryBlogs());

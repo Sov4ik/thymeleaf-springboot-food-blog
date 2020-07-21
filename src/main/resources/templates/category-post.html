@@ -267,20 +267,20 @@
                 <!-- Post Area -->
                 <div class="col-12 col-lg-8 col-xl-9">
                     <!-- Single Blog Post -->
-                    <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+                    <div class="single-blog-post style-1 d-flex flex-wrap mb-30" th:each="blog:${blogs}">
                         <!-- Blog Thumbnail -->
                         <div class="blog-thumbnail">
-                            <img src="../static/img/bg-img/9.jpg" alt="">
+                            <img th:src="@{../static/uploads/{filename}(filename=${blog.filename})}" alt="">
                         </div>
                         <!-- Blog Content -->
                         <div class="blog-content">
-                            <a href="#" class="post-tag">The Best</a>
-                            <a href="#" class="post-title">Friend eggs with ham</a>
+                            <a href="#" class="post-tag" th:text="${blog.tag}"></a>
+                            <a href="#" class="post-title" th:text="${blog.tittle}"></a>
                             <div class="post-meta">
-                                <a href="#" class="post-date">July 11, 2018</a>
-                                <a href="#" class="post-author">By Julia Stiles</a>
+                                <a href="#" class="post-date" th:text="${blog.date}"></a>
+                                <a href="#" class="post-author" th:text="${blog.author.getUsername()}"></a>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique justo id elit bibendum pharetra non vitae lectus. Mauris libero felis, dapibus a ultrices sed, commodo vitae odio. Sed auctor tellus quis arcu tempus.</p>
+                            <p th:text="${blog.description}"></p>
                         </div>
                     </div>
 
@@ -594,7 +594,7 @@
                     <!-- Copywrite Text -->
                     <p class="copywrite-text"><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></a></p>
                 </div>
                 <div class="col-12 col-sm-7">
                     <!-- Footer Nav -->
