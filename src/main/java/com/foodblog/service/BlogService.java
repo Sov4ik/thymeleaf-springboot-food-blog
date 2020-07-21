@@ -5,6 +5,7 @@ import com.foodblog.models.User;
 import com.foodblog.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -55,20 +56,13 @@ public class BlogService {
         return blogRepository.findAll().stream().limit(5).collect(Collectors.toCollection(LinkedList::new));
     }
 
+    @Transactional
     public void addNewBlog(User user,
                            String tittle,
                            String tag,
                            String data,
                            String description,
                            MultipartFile file) throws IOException {
-
-        Blog blog = new Blog();
-
-        blog.setAuthor(user);
-        blog.setTittle(tittle);
-        blog.setDate(data);
-        blog.setTag(tag);
-        blog.setDescription(description);
 
         if (file != null && !Objects.requireNonNull(file.getOriginalFilename()).isEmpty()) {
             File uploadDir = new File(uploadPath);
@@ -82,16 +76,20 @@ public class BlogService {
 
             file.transferTo(new File(uploadPath + "/" + resultFilename));
 
-            blog.setFilename(resultFilename);
+            Blog blog = new Blog(resultFilename, tag, tittle, data, user,description );
+
+            blogRepository.save(blog);
+
         }
 
-        blogRepository.save(blog);
     }
 
+    @Transactional
     public void deleteBlog(long id){
         blogRepository.deleteById(id);
     }
 
+    @Transactional
     public Blog singleBlog(long id){
         return blogRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("Invalid user Id:" + id));

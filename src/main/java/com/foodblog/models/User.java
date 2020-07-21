@@ -6,9 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -39,6 +37,23 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Blog> Blog;
+
+    public User(){
+
+    }
+
+    public User(@NotBlank(message = "Username cannot be empty") String username,
+                @NotBlank(message = "Password cannot be empty") String password,
+                boolean active,
+                @Email(message = "Email is not correct")
+                @NotBlank(message = "Email cannot be empty") String email,
+                Set<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.active = active;
+        this.email = email;
+        this.roles = roles;
+    }
 
     @Override
     public boolean equals(Object o) {

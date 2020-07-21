@@ -30,6 +30,15 @@ public class Blog {
 
     }
 
+    public Blog(String filename, String tag, String tittle, String date, User author, String description) {
+        this.filename = filename;
+        this.tag = tag;
+        this.tittle = tittle;
+        this.date = date;
+        this.author = author;
+        this.description = description;
+    }
+
     public String getMessage() {
         return message;
     }

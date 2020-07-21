@@ -160,9 +160,11 @@
                                 <div class="login-area">
 
                                     <a  sec:authorize="isAuthenticated()" th:href="@{/Profile}" sec:authentication="name"></a>
+                                    <a sec:authorize="isAuthenticated()" class="disabled">|</a>
                                     <a  sec:authorize="isAuthenticated()" th:href="@{/logout}">logout</a>
 
                                     <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+                                    <a sec:authorize="!isAuthenticated()" class="disabled">|</a>
                                     <a sec:authorize="!isAuthenticated()" th:href="@{/register}">Register</a>
                                 </div>
                             </div>

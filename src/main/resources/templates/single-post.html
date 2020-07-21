@@ -105,7 +105,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a th:href="@{index.html}">Home</a></li>
+                                    <li><a th:href="@{/}">Home</a></li>
                                     <li><a href="#">Pages</a>
                                         <ul class="dropdown">
                                             <li><a th:href="@{/}">Home</a></li>
@@ -161,9 +161,11 @@
                                 <div class="login-area">
 
                                     <a  sec:authorize="isAuthenticated()" th:href="@{/Profile}" sec:authentication="name"></a>
+                                    <a sec:authorize="isAuthenticated()" class="disabled">|</a>
                                     <a  sec:authorize="isAuthenticated()" th:href="@{/logout}">logout</a>
 
                                     <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+                                    <a sec:authorize="!isAuthenticated()" class="disabled">|</a>
                                     <a sec:authorize="!isAuthenticated()" th:href="@{/register}">Register</a>
                                 </div>
                             </div>
@@ -189,7 +191,7 @@
         <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
             <!-- Blog Thumbnail -->
             <div class="blog-thumbnail">
-                <img th:src="@{../static/uploads/${blog.filename}}" alt="">
+                <img th:src="@{../static/uploads/{filename}(filename=${blog.filename})}" alt="">
             </div>
             <!-- Blog Content -->
             <div class="blog-content">
@@ -282,6 +284,7 @@
 
                             <p>Duis posuere odio vitae neque egestas luctus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer risus neque, sollicitudin pharetra pulvinar a, imperdiet porttitor nunc. Aenean pretium, libero eu pulvinar commodo, lorem enim bibendum est, vel suscipit est mi non tortor. Vestibulum sit amet pretium tortor. Donec posuere, dui quis dictum hendrerit, odio mauris aliquam lacus, eu egestas libero risus vel nisi. Proin condimentum varius lectus sed dapibus. Etiam nec iaculis est.</p>
                         </div>
+                        <a class="alert-danger" sec:authorize="hasAuthority('ADMIN')" th:href="@{/delete/{id}(id=${blog.id})}">Delete</a>
                     </div>
 
                     <!-- Comment Area Start -->
