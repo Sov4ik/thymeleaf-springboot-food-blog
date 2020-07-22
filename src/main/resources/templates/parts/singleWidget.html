@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="singleWidget (bar_post)">
+    <div class="single-widget-area add-widget mb-30">
+        <img src="../static/img/bg-img/add.png" th:href="@{/add}" alt="">
+    </div>
+
+    <!-- Single Widget Area -->
+    <div class="single-widget-area post-widget mb-30">
+        <!-- Single Post Area -->
+        <div class="single-post-area d-flex" th:each="blog : ${bar_post}">
+            <!-- Blog Thumbnail -->
+            <div class="blog-thumbnail">
+                <img th:src="@{/static/uploads/{filename}(filename=${blog.filename})}" alt="">
+            </div>
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <a th:href="@{/blog/{id}(id=${blog.id})}" class="post-title" th:text="${blog.tittle}"></a>
+                <div class="post-meta">
+                    <a href="#" class="post-date" th:text="${blog.date}"></a>
+                    <a href="#" class="post-author" th:text="'By '+${blog.author.getUsername()}"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Single Widget Area -->
+    <div class="single-widget-area newsletter-widget mb-30">
+        <h6>Subscribe to newsletter</h6>
+        <form action="#" method="post">
+            <input type="search" name="widget-search" id="widgetSearch" placeholder="E-mail">
+            <button type="submit" class="btn bueno-btn w-100">Subscribe</button>
+        </form>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+</div>
+</body>
+</html>

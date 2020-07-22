@@ -1,183 +1,61 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Login page</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Bueno - Food Blog</title>
+
     <!-- Favicon -->
     <link rel="icon" th:href="@{../static/img/core-img/favicon.ico}">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" th:href="@{../static/css/style.css}">
+
 </head>
+
 <body>
+<!-- Preloader -->
+<div th:insert="parts/preloader :: preloader"></div>
 
-<header class="header-area">
+<!-- ##### Header Area Start ##### -->
+<header th:insert="parts/header :: header"></header>
+<!-- ##### Header Area End ##### -->
 
-    <!-- Top Header Area -->
-    <div class="top-header-area bg-img bg-overlay" style="background-image: url(../static/img/bg-img/header.jpg);">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center justify-content-between">
-                <div class="col-12 col-sm-6">
-                    <!-- Top Social Info -->
-                    <div class="top-social-info">
-                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Behance"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-5 col-xl-4">
-                    <!-- Top Search Area -->
-                    <div class="top-search-area">
-                        <form action="#" method="post">
-                            <input type="search" name="top-search" id="topSearch" placeholder="Search">
-                            <button type="submit" class="btn"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- ##### Treading Post Area Start ##### -->
+<div th:replace="parts/trending :: trending(${trending_blogs})"></div>
+<!-- ##### Treading Post Area End ##### -->
 
-    <!-- Logo Area -->
-    <div class="logo-area">
-        <a href="index.html"><img src="../static/img/core-img/logo.png" alt=""></a>
-    </div>
-
-    <!-- Navbar Area -->
-    <div class="bueno-main-menu" id="sticker">
-        <div class="classy-nav-container breakpoint-off">
-            <div class="container">
-                <!-- Menu -->
-                <nav class="classy-navbar justify-content-between" id="buenoNav">
-
-                    <!-- Toggler -->
-                    <div id="toggler"><img src="../static/img/core-img/toggler.png" alt=""></div>
-
-                    <!-- Navbar Toggler -->
-                    <div class="classy-navbar-toggler">
-                        <span class="navbarToggler"><span></span><span></span><span></span></span>
-                    </div>
-
-                    <!-- Menu -->
-                    <div class="classy-menu">
-
-                        <!-- Close Button -->
-                        <div class="classycloseIcon">
-                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                        </div>
-
-                        <!-- Nav Start -->
-                        <div class="classynav">
-                            <ul>
-                                <li><a th:href="@{/}">Home</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a th:href="@{/}">Home</a></li>
-                                        <li><a th:href="@{/category}">Catagory</a></li>
-                                        <li><a th:href="@{/category-post}">Catagory Post</a></li>
-                                        <li><a th:href="@{/contact}">Contact</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Recipes</a>
-                                    <div class="megamenu">
-                                        <ul class="single-mega cn-col-4">
-                                            <li><a href="#">- Recipe</a></li>
-                                            <li><a href="#">- Bread</a></li>
-                                            <li><a href="#">- Breakfast</a></li>
-                                            <li><a href="#">- Meat</a></li>
-                                            <li><a href="#">- Fastfood</a></li>
-                                            <li><a href="#">- Salad</a></li>
-                                            <li><a href="#">- Soup</a></li>
-                                        </ul>
-                                        <ul class="single-mega cn-col-4">
-                                            <li><a href="#">- Recipe</a></li>
-                                            <li><a href="#">- Bread</a></li>
-                                            <li><a href="#">- Breakfast</a></li>
-                                            <li><a href="#">- Meat</a></li>
-                                            <li><a href="#">- Fastfood</a></li>
-                                            <li><a href="#">- Salad</a></li>
-                                            <li><a href="#">- Soup</a></li>
-                                        </ul>
-                                        <ul class="single-mega cn-col-4">
-                                            <li><a href="#">- Recipe</a></li>
-                                            <li><a href="#">- Bread</a></li>
-                                            <li><a href="#">- Breakfast</a></li>
-                                            <li><a href="#">- Meat</a></li>
-                                            <li><a href="#">- Fastfood</a></li>
-                                            <li><a href="#">- Salad</a></li>
-                                            <li><a href="#">- Soup</a></li>
-                                        </ul>
-                                        <ul class="single-mega cn-col-4">
-                                            <li><a href="#">- Recipe</a></li>
-                                            <li><a href="#">- Bread</a></li>
-                                            <li><a href="#">- Breakfast</a></li>
-                                            <li><a href="#">- Meat</a></li>
-                                            <li><a href="#">- Fastfood</a></li>
-                                            <li><a href="#">- Salad</a></li>
-                                            <li><a href="#">- Soup</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li><a th:href="@{/contact}">Contact</a></li>
-                            </ul>
-                        </div>
-                        <!-- Nav End -->
-
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
-
-<h1>Register page</h1>
-<div class="contact-form-area">
-    <form th:action="@{/register}" method="post">
-        <div class="contact-form-area">
-                <div class="row">
-                    <div class="col-12 col-lg-6">
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Name*">
-                    </div>
-                    <div class="col-12 col-lg-6">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email*">
-                    </div>
-                    <div class="col-12">
-                        <input type="text" class="form-control" id="password" name="password" placeholder="password">
-                    </div>
-                    <div class="col-12">
-                        <button class="btn bueno-btn mt-30" type="submit">Submit Comment</button>
-                    </div>
-                </div>
-        </div>
-    </form>
-</div>
-
-<footer class="footer-area">
+<!-- ##### Registration Area Start ##### -->
+<div class="single-widget-area newsletter-widget mb-30 login-widget">
     <div class="container">
-        <div class="row">
-            <div class="col-12 col-sm-5">
-                <!-- Copywrite Text -->
-                <p class="copywrite-text"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Sov4ik</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-            </div>
-            <div class="col-12 col-sm-7">
-                <!-- Footer Nav -->
-                <div class="footer-nav">
-                    <ul>
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Recipes</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
+        <h5 class="login-title">Registration</h5>
+        <form action="#" method="post">
+            <input type="text" name="username" id="widgetSearch" placeholder="Name" required>
+            <input type="search" name="email" id="widgetSearch" placeholder="E-mail" required>
+            <input type="password" name="password" id="widgetSearch" placeholder="Password" required>
+            <button type="submit" class="btn bueno-btn w-100">Register</button>
+        </form>
+        <div class="reg-link">
+            <p>If you're already registered please <a th:href="@{/login}" class="reg-link__btn">sign in</a></p>
         </div>
     </div>
-</footer>
+
+</div>
+<!-- ##### Registration Area End ##### -->
+
+<!-- ##### Instagram Area Start ##### -->
+<div th:insert="parts/instaArea :: insta"></div>
+<!-- ##### Instagram Area End ##### -->
+
+<!-- ##### Footer Area Start ##### -->
+<footer th:insert="parts/footer :: footer"></footer>
+<!-- ##### Footer Area Start ##### -->
 
 <!-- ##### All Javascript Script ##### -->
 <!-- jQuery-2.2.4 js -->
@@ -191,4 +69,5 @@
 <!-- Active js -->
 <script th:src="@{../static/js/active.js}"></script>
 </body>
+
 </html>

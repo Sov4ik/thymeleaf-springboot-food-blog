@@ -64,6 +64,8 @@ public class BlogService {
                            String description,
                            MultipartFile file) throws IOException {
 
+        System.out.println(data);
+
         if (file != null && !Objects.requireNonNull(file.getOriginalFilename()).isEmpty()) {
             File uploadDir = new File(uploadPath);
 

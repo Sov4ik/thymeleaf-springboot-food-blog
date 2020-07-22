@@ -1,21 +1,165 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Bueno - Food Blog</title>
+
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{../static/img/core-img/favicon.ico}">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" th:href="@{../static/css/style.css}">
+
 </head>
+
 <body>
+<!-- Preloader -->
+<div th:insert="parts/preloader :: preloader"></div>
 
-<div>
-    <form method="post" enctype="multipart/form-data" th:action="@{/add}">
-        <input type="text" name="tittle" placeholder="Заголовок" />
-        <input type="text" name="tag" placeholder="Тэг">
-        <input type="text" name="data" placeholder="Дата" />
-        <input type="text" name="description" placeholder="Описание">
-        <input type="file" name="file">
-        <button type="submit">Добавить</button>
-    </form>
+<!-- ##### Header Area Start ##### -->
+<header th:insert="parts/header :: header"></header>
+<!-- ##### Header Area End ##### -->
+
+<!-- ##### Treading Post Area Start ##### -->
+<div th:replace="parts/trending :: trending(${trending_blogs})"></div>
+<!-- ##### Treading Post Area End ##### -->
+
+<!-- ##### Adding a new post  Start ##### -->
+<div class="single-widget-area newsletter-widget mb-30 adding-widget">
+    <div class="container">
+        <h5 class="login-title">Add a new post</h5>
+        <form th:action="@{/add}" method="post" enctype="multipart/form-data">
+            <select required class="form-control choose-catagory" id="widgetSearch" name="tag">
+                <option value="Catagory">Catagory</option>
+                <option value="Healthy Food">Healthy Food</option>
+                <option value="Organic Cuisine">Organic Cuisine</option>
+                <option value="Vegetarian Food">Vegetarian Food</option>
+                <option value="Chichen Food">Chichen Food</option>
+                <option value="Pizza">Pizza</option>
+                <option value="Fast Food">Fast Food</option>
+                <option value="Burgers">Burgers</option>
+                <option value="Deserts">Deserts</option>
+                <option value="Soups">Soups</option>
+            </select>
+            <input class="post-title" type="text" name="tittle" id="widgetSearch" placeholder="Title" required>
+            <input type="hidden" id="data" name="data">
+
+            <script>
+                document.getElementById('data').value = new Date().toDateString();
+            </script>
+
+            <textarea class="post-text" name="description" required="required" placeholder="Your description"></textarea>
+
+            <!-- ##### File-Upload  Start ##### -->
+            <div class="file-form-wrap">
+                <div class="file-upload">
+                    <label>
+                        <input id="uploaded-file1" type="file" name="file" accept="image/*,image/jpeg" onchange="getFileParam();" />
+                        <span>Attach an Image</span>
+                    </label>
+                </div>
+                <div id="preview1">&nbsp;</div>
+                <div id="file-name1">&nbsp;</div>
+                <div id="file-size1">&nbsp;</div>
+            </div>
+            <script type="text/javascript">
+                function getFileParam() {
+                    try {
+                        var file = document.getElementById('uploaded-file1').files[0];
+
+                        if (file) {
+                            var fileSize = 0;
+
+                            if (file.size > 1024 * 1024) {
+                                fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+                            }else {
+                                fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+                            }
+
+                            document.getElementById('file-name1').innerHTML = 'Name: ' + file.name;
+                            document.getElementById('file-size1').innerHTML = 'Size: ' + fileSize;
+
+                            if (/\.(jpe?g|bmp|gif|png)$/i.test(file.name)) {
+                                var elPreview = document.getElementById('preview1');
+                                elPreview.innerHTML = '';
+                                var newImg = document.createElement('img');
+                                newImg.className = "preview-img";
+
+                                if (typeof file.getAsDataURL=='function') {
+                                    if (file.getAsDataURL().substr(0,11)=='data:image/') {
+                                        newImg.onload=function() {
+                                            document.getElementById('file-name1').innerHTML+=' ('+newImg.naturalWidth+'x'+newImg.naturalHeight+' px)';
+                                        }
+                                        newImg.setAttribute('src',file.getAsDataURL());
+                                        elPreview.appendChild(newImg);
+                                    }
+                                }else {
+                                    var reader = new FileReader();
+                                    reader.onloadend = function(evt) {
+                                        if (evt.target.readyState == FileReader.DONE) {
+                                            newImg.onload=function() {
+                                                document.getElementById('file-name1').innerHTML+=' ('+newImg.naturalWidth+'x'+newImg.naturalHeight+' px)';
+                                            }
+
+                                            newImg.setAttribute('src', evt.target.result);
+                                            elPreview.appendChild(newImg);
+                                        }
+                                    };
+
+                                    var blob;
+                                    if (file.slice) {
+                                        blob = file.slice(0, file.size);
+                                    }else if (file.webkitSlice) {
+                                        blob = file.webkitSlice(0, file.size);
+                                    }else if (file.mozSlice) {
+                                        blob = file.mozSlice(0, file.size);
+                                    }
+                                    reader.readAsDataURL(blob);
+                                }
+                            }
+                        }
+                    }catch(e) {
+                        var file = document.getElementById('uploaded-file1').value;
+                        file = file.replace(/\\/g, "/").split('/').pop();
+                        document.getElementById('file-name1').innerHTML = '���: ' + file;
+                    }
+                }
+            </script>
+            <!-- ##### File-Upload  End ##### -->
+
+            <button type="submit" class="btn bueno-btn w-100">Add</button>
+        </form>
+    </div>
+
 </div>
+<!-- ##### Adding a new post End ##### -->
 
+<!-- ##### Instagram Area Start ##### -->
+<div th:insert="parts/instaArea :: insta"></div>
+<!-- ##### Instagram Area End ##### -->
+
+<!-- ##### Footer Area Start ##### -->
+<footer th:insert="parts/footer :: footer"></footer>
+<!-- ##### Footer Area Start ##### -->
+
+<!-- ##### All Javascript Script ##### -->
+<!-- jQuery-2.2.4 js -->
+<script th:src="@{../static/js/jquery/jquery-2.2.4.min.js}"></script>
+<!-- Popper js -->
+<script th:src="@{../static/js/bootstrap/popper.min.js}"></script>
+<!-- Bootstrap js -->
+<script th:src="@{../static/js/bootstrap/bootstrap.min.js}"></script>
+<!-- All Plugins js -->
+<script th:src="@{../static/js/plugins/plugins.js}"></script>
+<!-- Active js -->
+<script th:src="@{../static/js/active.js}"></script>
 </body>
+
 </html>

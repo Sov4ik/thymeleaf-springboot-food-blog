@@ -41,6 +41,12 @@ public class BlogController {
         return "index";
     }
 
+    @GetMapping("/category")
+    public String category(Model model){
+        model.addAttribute("trending_blogs", blogService.trendingBlogs());
+        return "category";
+    }
+
     @GetMapping("/category-post")
     public String categoryPost(Model model){
 
@@ -76,7 +82,9 @@ public class BlogController {
     }
 
     @GetMapping("/add")
-    public String addBlog(){
+    public String addBlog(Model model){
+        model.addAttribute("trending_blogs", blogService.trendingBlogs());
+
         return "addBlog";
     }
 
@@ -91,6 +99,8 @@ public class BlogController {
     public String singleBlog(@PathVariable("id") long id,
                              Model model){
         model.addAttribute("blog" ,blogService.singleBlog(id));
+
+        model.addAttribute("trending_blogs", blogService.trendingBlogs());
 
         model.addAttribute("bar_post", blogService.sideBarPosts());
         return "single-post";
